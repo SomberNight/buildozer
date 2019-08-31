@@ -1124,8 +1124,9 @@ class TargetAndroid(Target):
             apk = u'{packagename}-{mode}.apk'.format(
                 packagename=packagename, mode=mode)
             apk_dir = join(dist_dir, "build", "outputs", "apk", mode_sign)
-            apk_dest = u'{packagename}-{version}-{mode}.apk'.format(
-                packagename=packagename, mode=mode, version=version)
+            target_arch = config.getdefault('app', 'android.arch', "armeabi-v7a")
+            apk_dest = u'{packagename}-{version}-{target_arch}-{mode}.apk'.format(
+                packagename=packagename, mode=mode, version=version, target_arch=target_arch)
 
         else:
             # on ant, the apk use the title, and have version
