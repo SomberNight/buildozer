@@ -1179,6 +1179,9 @@ class TargetAndroid(Target):
             (exists(join(dist_dir, x)) for x in gradle_files))
         packagename = config.get('app', 'package.name')
 
+        self.buildozer.info(f'>>>>> 1 >>> is_gradle_build={is_gradle_build}. dist_dir={dist_dir}')
+        self.buildozer.info(f'>>>>> 2 >>> packagename={packagename}. mode={mode}')
+
         if is_gradle_build:
             # on gradle build, the apk use the package name, and have no version
             packagename = basename(dist_dir)  # gradle specifically uses the folder name
@@ -1198,6 +1201,8 @@ class TargetAndroid(Target):
                 mode=mode)
             apk_dir = join(dist_dir, "bin")
 
+        self.buildozer.info(f'>>>>> 3 >>> packagename={packagename}. version={version}')
+        self.buildozer.info(f'>>>>> 4 >>> arch={self._arch}. mode={mode}')
         apk_dest = u'{packagename}-{version}-{arch}-{mode}.apk'.format(
             packagename=packagename, mode=mode, version=version,
             arch=self._arch)
